@@ -92,7 +92,7 @@
   
   // Helper aliases
   
-  var aliases = exports.aliases = {
+  var aliases = keycode.aliases = {
     'ctl': 17,
     'pause': 19,
     'break': 19,
