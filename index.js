@@ -2,12 +2,12 @@
   // Source: http://jsfiddle.net/vWx8V/
   // http://stackoverflow.com/questions/5603195/full-list-of-javascript-keycodes
   
-  var has = ({}).hasOwnProperty
+  var has = ({}).hasOwnProperty;
   
   /**
    * Conenience method returns corresponding value for given keyName or keyCode.
    *
-   * @param {Mixed} keyCode {Number} or keyName {String}
+   * @param {Mixed} searchInput : keyCode {Number} or keyName {String}
    * @return {Mixed}
    * @api public
    */
@@ -15,37 +15,37 @@
   var keycode = function(searchInput) {
     // Keyboard Events
     if (searchInput && 'object' === typeof searchInput) {
-      var hasKeyCode = searchInput.which || searchInput.keyCode || searchInput.charCode
-      if (hasKeyCode) searchInput = hasKeyCode
+      var hasKeyCode = searchInput.which || searchInput.keyCode || searchInput.charCode;
+      if (hasKeyCode) searchInput = hasKeyCode;
     }
   
     // Numbers
-    if ('number' === typeof searchInput) return names[searchInput]
+    if ('number' === typeof searchInput) return names[searchInput];
   
     // Everything else (cast to string)
-    var search = String(searchInput)
+    var search = String(searchInput);
   
     // check codes
-    var foundNamedKey = codes[search.toLowerCase()]
-    if (foundNamedKey) return foundNamedKey
+    var foundNamedKey = codes[search.toLowerCase()];
+    if (foundNamedKey) return foundNamedKey;
   
     // check aliases
-    var foundNamedKey = aliases[search.toLowerCase()]
-    if (foundNamedKey) return foundNamedKey
+    var foundNamedKey = aliases[search.toLowerCase()];
+    if (foundNamedKey) return foundNamedKey;
   
     // weird character?
-    if (search.length === 1) return search.charCodeAt(0)
+    if (search.length === 1) return search.charCodeAt(0);
   
-    return undefined
-  }
+    return undefined;
+  };
   
   /**
    * Get by name
    *
-   *   exports.code['enter'] // => 13
+   *   keycode.code['enter'] // => 13
    */
   
-  var codes = exports.code = exports.codes = {
+  var codes = keycode.code = keycode.codes = {
     'backspace': 8,
     'tab': 9,
     'enter': 13,
@@ -88,7 +88,7 @@
     '\\': 220,
     ']': 221,
     "'": 222
-  }
+  };
   
   // Helper aliases
   
@@ -103,7 +103,7 @@
     'ins': 45,
     'del': 46,
     'spc': 32
-  }
+  };
   
   
   /*!
@@ -111,31 +111,31 @@
    */
   
   // lower case chars
-  for (i = 97; i < 123; i++) codes[String.fromCharCode(i)] = i - 32
+  for (i = 97; i < 123; i++) codes[String.fromCharCode(i)] = i - 32;
   
   // numbers
-  for (var i = 48; i < 58; i++) codes[i - 48] = i
+  for (var i = 48; i < 58; i++) codes[i - 48] = i;
   
   // function keys
-  for (i = 1; i < 13; i++) codes['f'+i] = i + 111
+  for (i = 1; i < 13; i++) codes['f'+i] = i + 111;
   
   // numpad keys
-  for (i = 0; i < 10; i++) codes['numpad '+i] = i + 96
+  for (i = 0; i < 10; i++) codes['numpad '+i] = i + 96;
   
   /**
    * Get by code
    *
-   *   exports.name[13] // => 'Enter'
+   *   keycode.name[13] // => 'Enter'
    */
   
-  var names = exports.names = exports.title = {} // title for backward compat
+  var names = keycode.names = keycode.title = {}; // title for backward compat
   
   // Create reverse mapping
-  for (i in codes) names[codes[i]] = i
+  for (i in codes) names[codes[i]] = i;
   
   // Add aliases
   for (var alias in aliases) {
-    codes[alias] = aliases[alias]
+    codes[alias] = aliases[alias];
   }
 
   
@@ -145,4 +145,5 @@
     angular.module('keycode', []).value('keycode', keycode);
   } else {
     window.keycode = keycode;
+  }
 })();
